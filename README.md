@@ -6,12 +6,6 @@ Pixel Perplexity is an indie puzzle-adventure game set in a neon-voxel world. Pl
     The game features a variety of power-ups and items that players can collect to aid them in their quest.
     The game has a range of difficulty levels and a leaderboard for players to compete with others.
 
-#### Requirements
-
-    Unity game engine
-    Windows, MacOS or Linux
-    2GB of RAM
-
 #### Installation
 
     Clone the repository to your local machine by
