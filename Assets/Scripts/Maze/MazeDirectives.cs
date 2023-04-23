@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using System;
 
 public class MazeDirectives : MonoBehaviour
 {
@@ -13,6 +14,8 @@ public class MazeDirectives : MonoBehaviour
     public MazeKey mazeKeyPrefab;
     public PauseMenu pauseMenu;
     public GameFinishedMenu gameFinishedMenu;
+    public delegate void MazeCompletedEventHandler();
+    public static event MazeCompletedEventHandler OnMazeCompleted;
     MazeGoal mazeGoal;
     int foundKeys;
     List<Vector3> mazeKeyPositions;
@@ -31,7 +34,12 @@ public class MazeDirectives : MonoBehaviour
         MazeGenerator.OnMazeReady += StartDirectives;
         pauseMenu = FindObjectOfType<PauseMenu>();
         gameFinishedMenu = FindObjectOfType<GameFinishedMenu>();
+
+        // Load the saved best times
+        int count = PlayerPrefs.GetInt("TopTimesCount", 0);
+        topTimes = gameFinishedMenu.LoadBestTimes(count);
     }
+
 
     void Update()
     {
@@ -77,14 +85,21 @@ public class MazeDirectives : MonoBehaviour
                 topTimes.RemoveAt(topTimes.Count - 1);
             }
 
+            // Save the best times
+            gameFinishedMenu.SaveBestTimes(topTimes);
+
             if (gameFinishedMenu != null)
             {
-                gameFinishedMenu.ShowGameFinishedMenu(GetTopTimes()); // Updated this line
+                gameFinishedMenu.ShowGameFinishedMenu(topTimes); // Updated this line
             }
             else
             {
                 Debug.LogError("GameFinishedMenu reference not found in MazeDirectives");
             }
+            PlayerPrefs.SetFloat("LastCompletedTime", timer);
+            PlayerPrefs.Save();
+
+            OnMazeCompleted?.Invoke();
         }
     }
 

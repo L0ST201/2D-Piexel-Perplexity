@@ -60,18 +60,19 @@ public class GameFinishedMenu : MonoBehaviour
         }
     }
 
-     private List<float> GetTopTimes()
+    private List<float> GetTopTimes()
     {
         List<float> topTimes = new List<float>();
         int count = PlayerPrefs.GetInt("TopTimesCount", 0);
 
         for (int i = 0; i < count; i++)
         {
-            topTimes.Add(PlayerPrefs.GetFloat($"TopTime_{i}"));
+            topTimes.Add(PlayerPrefs.GetFloat($"BestTime_{i}")); // Change this line
         }
 
         return topTimes;
     }
+
    
     public void CloseGameFinishedMenu()
     {
@@ -97,7 +98,6 @@ public class GameFinishedMenu : MonoBehaviour
     public void Restart()
     {
         Time.timeScale = 1f;
-        PlayerPrefs.SetFloat("LastCompletedTime", Time.timeSinceLevelLoad);
         
         // Add this line to close the game finished menu before restarting
         CloseGameFinishedMenu();
@@ -105,6 +105,7 @@ public class GameFinishedMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         FindObjectOfType<MenuAudioManager>().RestartMusic();
     }
+
 
    public void QuitGame()
     {
@@ -114,14 +115,17 @@ public class GameFinishedMenu : MonoBehaviour
 
 
     // Call this method to save the new best times
-    public void SaveBestTimes(List<float> bestTimes)
+  public void SaveBestTimes(List<float> bestTimes)
     {
+        PlayerPrefs.SetInt("TopTimesCount", bestTimes.Count);
+
         for (int i = 0; i < bestTimes.Count; i++)
         {
             PlayerPrefs.SetFloat($"BestTime_{i}", bestTimes[i]);
         }
         PlayerPrefs.Save();
     }
+
 
     // Call this method to load the saved best times
     public List<float> LoadBestTimes(int count)
