@@ -30,10 +30,4 @@ Pixel Perplexity is an indie puzzle-adventure game set in a neon-voxel world. Pl
 #### Creators
 
     Ben Armour
-    Ben Devine
-
-    The game is licensed under the MIT license.
-
-Contact
-
-    You can reach out to us through...
+    Ben Devine (Former developer)
