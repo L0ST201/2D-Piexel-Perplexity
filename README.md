@@ -1,6 +1,6 @@
 # Pixel Perplexity - Unity Game
 Pixel Perplexity is an indie puzzle-adventure game set in a neon-voxel world. Players take on the role of a character trapped in a mysterious maze and must navigate through obstacles such as walls, traps, and enemies to find their way out. The game's unique mechanics allow players to manipulate the walls of the maze to create new paths to solve puzzles.
-#### Gameplay
+#### Gameplay Plans
 
     Players must use timed buttons, levers with limited uses, and targets to shoot as well as manipulate walls to create new paths.
     The game features a variety of power-ups and items that players can collect to aid them in their quest.
